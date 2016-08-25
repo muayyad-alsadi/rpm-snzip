@@ -1,6 +1,6 @@
 Name:           snzip
 Version:        1.0.3
-Release:        2%{?dist}
+Release:        4%{?dist}
 Summary:        compression/decompression tool based on snappy
 
 License:        BSD
@@ -24,17 +24,26 @@ The default format is framing-format.
 autoreconf -fvi
 %configure
 %make_build
+echo -e '#! /bin/bash\nsnzip -d "$@"' > snunzip
 
 %install
 %make_install
-rm %{buildroot}%{_docdir}/snzip/{COPYING,INSTALL} || :
+install -Dpm0755 snunzip %{buildroot}%{_bindir}/snunzip
+rm %{buildroot}%{_docdir}/snzip/{COPYING,INSTALL,README.md,AUTHORS,ChangeLog,NEWS} || :
 
 %files
 %license COPYING
 %doc README.md AUTHORS ChangeLog NEWS
 %{_bindir}/snzip
+%{_bindir}/snunzip
 
 %changelog
+* Thu Aug 25 2016 Muayyad Alsadi <alsadi@gmail.com> - 1.0.3-4
+- remove installed docs to make build work on epel
+
+* Thu Aug 25 2016 Muayyad Alsadi <alsadi@gmail.com> - 1.0.3-3
+- Add snunzip
+
 * Tue Aug 23 2016 Muayyad Alsadi <alsadi@gmail.com> - 1.0.3-2
 - Add missing BuildRequire snappy-devel
 

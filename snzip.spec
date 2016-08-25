@@ -1,13 +1,13 @@
 Name:           snzip
 Version:        1.0.3
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        compression/decompression tool based on snappy
 
 License:        BSD
 URL:            https://github.com/kubo/%{name}
 Source0:        %{url}/archive/%{version}/%{name}-%{version}.tar.gz
 
-BuildRequires:  autoconf, automake, libtool, gcc, gcc-c++
+BuildRequires:  autoconf, automake, libtool, gcc, gcc-c++, snappy-devel
 
 %description
 Snzip is one of command line tools using snappy.
@@ -35,5 +35,8 @@ rm %{buildroot}%{_docdir}/snzip/{COPYING,INSTALL} || :
 %{_bindir}/snzip
 
 %changelog
+* Tue Aug 23 2016 Muayyad Alsadi <alsadi@gmail.com> - 1.0.3-2
+- Add missing BuildRequire snappy-devel
+
 * Tue Aug 23 2016 Muayyad Alsadi <alsadi@gmail.com> - 1.0.3-1
 - initial package
